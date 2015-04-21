@@ -1,28 +1,26 @@
 <?php
 
-class Document_Tag_Classparser extends Document_Tag_Multihref {
+namespace Document\Tag;
+
+use Document\Tag as DocumentTag;
+use Classparser\Config as Config;
+use Classparser\Install as Install;
+
+class Classparser extends DocumentTag\Multihref {
     /**
      * @see Document_Tag_Classparser::getClassName
      * @return string
      */
     static public function getClassName(){
-        return Classparser_Config::getClassName();
+        return Config::getClassName();
     }
-
-    /**
-     * @see Document_Tag_Classparser::getClassTypeString
-     * @return string
-     */
-	static public function getClassTypeString(){
-		return Classparser_Config::getClassTypeString();
-	}
 
     /**
      * @see Document_Tag_Classparser::getClassType
      * @return Object_Class
      */
 	static public function getClassType(){
-		return Classparser_Config::getClassType();
+		return Config::getClassType();
 	}
 
     /**
@@ -30,7 +28,7 @@ class Document_Tag_Classparser extends Document_Tag_Multihref {
      * @return string
      */
     static public function getClassTagProperty(){
-        return Classparser_Config::getClassTagProperty();
+        return Config::getClassTagProperty();
     }
 
     /**
@@ -73,10 +71,10 @@ class Document_Tag_Classparser extends Document_Tag_Multihref {
      * @return string
      */
     public function getClass($doPrintOutput = FALSE){
-        $classTypeString = self::getClassTypeString();
+        $className = self::getClassName();
 
-    	if (!class_exists($classTypeString)) {
-            Logger::error("Class $classTypeString doesn't exist.");
+    	if (!Install::hasClass($className)) {
+            \Logger::error("Class $className doesn't exist.");
 
     		return;
     	}
@@ -94,7 +92,7 @@ class Document_Tag_Classparser extends Document_Tag_Multihref {
     				$classStack[] = $value;
     			}
     		} else {
-                Logger::error("Invalid class " . get_class($class) . ".");
+                \Logger::error("Invalid class " . get_class($class) . ".");
             }
     	}
 

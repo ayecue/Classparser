@@ -1,15 +1,21 @@
 <?php
 
-class Classparser_Plugin extends Pimcore_API_Plugin_Abstract implements Pimcore_API_Plugin_Interface {
+namespace Classparser;
+
+use Pimcore\API\Plugin as PluginLib;
+use Classparser\Config as Config;
+use Classparser\Install as Install;
+
+class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterface {
     
 	/**
      * @see Classparser_Plugin::install
      * @return string
      */
     public static function install(){
-    	$classname = Classparser_Config::getClassName();
-    	$pathToJson = Classparser_Config::getClassJsonPath();
-    	$success = Classparser_Install::createClassByJson($classname,$pathToJson);
+    	$classname = Config::getClassName();
+    	$pathToJson = Config::getClassJsonPath();
+    	$success = Install::createClassByJson($classname,$pathToJson);
 
     	if ($success && self::isInstalled()) {
 			return "Plugin successfully installed.";
@@ -23,8 +29,8 @@ class Classparser_Plugin extends Pimcore_API_Plugin_Abstract implements Pimcore_
      * @return string
      */
 	public static function uninstall() {
-		$classname = Classparser_Config::getClassName();
-        $success = Classparser_Install::removeClass($classname);
+		$classname = Config::getClassName();
+        $success = Install::removeClass($classname);
 
         if ($success && !self::isInstalled()) {
         	return "Plugin successfully uninstalled.";
@@ -38,9 +44,9 @@ class Classparser_Plugin extends Pimcore_API_Plugin_Abstract implements Pimcore_
      * @return boolean
      */
 	public static function isInstalled(){
-		$classname = Classparser_Config::getClassName();
+		$classname = Config::getClassName();
 
-		return Classparser_Install::hasClass($classname);
+		return Install::hasClass($classname);
 	}
 }
 

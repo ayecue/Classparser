@@ -1,6 +1,10 @@
 <?php
 
-class Classparser_Install {
+namespace Classparser;
+
+use Object\ClassDefinition as ClassDefinition;
+
+class Install {
 
     /**
      * @see Classparser_Install::createClassByJson
@@ -11,16 +15,16 @@ class Classparser_Install {
         $json = file_get_contents($pathToJson);
 
         try {
-            $class = Object_Class::create();
+            $class = ClassDefinition::create();
             $class->setName($classname);
             $class->save();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
 
         try {
-            Object_Class_Service::importClassDefinitionFromJson($class,$json);
-        } catch (Exception $e) {
+            ClassDefinition\Service::importClassDefinitionFromJson($class,$json);
+        } catch (\Exception $e) {
             $class->delete();
 
             return false;
@@ -36,12 +40,12 @@ class Classparser_Install {
      */
     static public function removeClass($classname) {
          try {
-            $class = Object_Class::getByName($classname);
+            $class = ClassDefinition::getByName($classname);
 
             if ($class) {
                 $class->delete();
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
 
@@ -54,7 +58,7 @@ class Classparser_Install {
      * @return boolean
      */
     static public function hasClass($classname) {
-        return class_exists("Object_$classname") && Object_Class::getByName($classname);
+        return ClassDefinition::getByName($classname) != NULL;
     }
 
 }
