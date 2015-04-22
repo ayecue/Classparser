@@ -1,18 +1,26 @@
 <?php
 
-namespace Document\Tag;
+namespace Pimcore\Model\Document\Tag;
 
-use Document\Tag as DocumentTag;
+use Pimcore\Model as PimcoreModel;
 use Classparser\Config as Config;
 use Classparser\Install as Install;
 
-class Classparser extends DocumentTag\Multihref {
+class Classparser extends PimcoreModel\Document\Tag\Multihref {
     /**
      * @see Document_Tag_Classparser::getClassName
      * @return string
      */
     static public function getClassName(){
         return Config::getClassName();
+    }
+
+    /**
+     * @see Document_Tag_Classparser::getClassTypeString
+     * @return string
+     */
+    static public function getClassTypeString(){
+        return Config::getClassTypeString();
     }
 
     /**

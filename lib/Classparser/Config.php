@@ -23,6 +23,14 @@ class Config {
     }
 
     /**
+     * @see Classparser_Config::getClassTypeString
+     * @return string
+     */
+    static public function getClassTypeString(){
+        return "Object\\" . self::getClassName();
+    }
+
+    /**
      * @see Classparser_Config::getClassType
      * @return Object_Classhelper
      */
