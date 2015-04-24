@@ -2,7 +2,7 @@
 
 namespace Classparser;
 
-use Object\ClassDefinition as ClassDefinition;
+use Pimcore\Model\Object\ClassDefinition as ClassDefinition;
 
 class Install {
 

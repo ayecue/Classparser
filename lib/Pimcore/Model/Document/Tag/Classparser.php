@@ -16,14 +16,6 @@ class Classparser extends PimcoreModel\Document\Tag\Multihref {
     }
 
     /**
-     * @see Document_Tag_Classparser::getClassTypeString
-     * @return string
-     */
-    static public function getClassTypeString(){
-        return Config::getClassTypeString();
-    }
-
-    /**
      * @see Document_Tag_Classparser::getClassType
      * @return Object_Class
      */
@@ -63,7 +55,7 @@ class Classparser extends PimcoreModel\Document\Tag\Multihref {
             array(
                 'title' => self::getClassName(),
                 'allowedTypes' => array(
-                    self::getClassTypeString()
+                    self::getClassName()
                 )
             )
         );

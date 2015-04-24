@@ -2,7 +2,7 @@
 
 namespace Classparser;
 
-use Object\ClassDefinition as ClassDefinition;
+use Pimcore\Model\Object\ClassDefinition as ClassDefinition;
 
 class Config {
 	
@@ -23,19 +23,11 @@ class Config {
     }
 
     /**
-     * @see Classparser_Config::getClassTypeString
-     * @return string
-     */
-    static public function getClassTypeString(){
-        return "Object\\" . self::getClassName();
-    }
-
-    /**
      * @see Classparser_Config::getClassType
      * @return Object_Classhelper
      */
 	static public function getClassType(){
-		return ClassDefinition::getByName(self::getClassName());
+		return "Pimcore\\Model\\Object\\" . self::getClassName();
 	}
 
 	/**
